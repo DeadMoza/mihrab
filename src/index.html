@@ -4,7 +4,15 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
     <link rel="stylesheet" href="index.css">
+
+
     <title>Pray Alert</title>
 
 </head>
@@ -13,24 +21,92 @@
 
     <div class="header">
 
-        <p style="border-bottom: solid 1px;">asur 40 mins ago</p>
-        <p style="border-top: solid 1px;">maghrib in 20 mins</p>
+        <p style="font-size: 40px; font-weight: bold; padding-top: 10px;">Asur</p>
+        <p>20 minutes until maghrib</p>
 
-        <button> Location </button>
+        <select name="location" id="location">
+            <optgroup label="Libya"> 
+                <option value="tripoli">Tripoli</option>
+                <option value="misurata">Misurata</option>
+                <option value="benghazi">Benghazi</option>
+            </optgroup>
+            
+            <optgroup label="Turkiye">
+                <option value="istanbul">Istanbul</option>
+                <option value="ankara">Ankara</option>
+                <option value="Eskişehir">eskişehir</option>
+            </optgroup>
+           
+
+        </select>
 
     </div>
 
-    <div class="tables">
+    <div class="main">
 
-        <div class="today">
+        <div class="tables">
 
-            today's table goes here
+            <div class="navigation">
+
+                <button class="back"></button>
+                <button class="current">Today | 21st November</button>
+                <button class="next"></button>
+
+            </div>
+
+            <div class="prayers">
+
+                <p id="fajr">Fajr 
+                    <span class="time"> 5:34 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                </p>
+
+                <p id="sunrise">Sunrise 
+                    <span class="time"> 7:25 AM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                </p>
+
+                <p id="dhuhr">Dhuhr 
+                    <span class="time"> 12:43 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                </p>
+
+                <p id="asur">Asur 
+                    <span class="time"> 15:12 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span> 
+                </p>
+
+                <p id="maghrib">Maghrib 
+                    <span class="time"> 18:06 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                </p>
+
+                <p id="isha">Isha 
+                    <span class="time"> 19:02 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>          
+                </p>
+
+            </div>
             
         </div>
 
-        <div class="tomorrow">
+        <div class="misc">
+            <p>
+                يقفز الثعلب السريع فوق الكلب الكسول
+                يقفز الثعلب السريع فوق الكلب الكسول
+                يقفز الثعلب السريع فوق الكلب الكسول
+                يقفز الثعلب السريع فوق الكلب الكسول
+                يقفز الثعلب السريع فوق الكلب الكسول
+                يقفز الثعلب السريع فوق الكلب الكسول
+                يقفز الثعلب السريع فوق الكلب الكسول
 
-            tomorrow's table goes here
+
+
+            </p>
+
+            <p>The quick fox jumps over the lazy dog...
+                The quick fox jumps over the lazy dog
+                The quick fox jumps over the lazy dog
+                The quick fox jumps over the lazy dog
+                The quick fox jumps over the lazy dog
+                The quick fox jumps over the lazy dog
+                The quick fox jumps over the lazy dog.
+
+            </p>
 
         </div>
 
@@ -38,5 +114,6 @@
 
     </div>
 
+    <script src="index.js"></script>
 </body>
 </html>
