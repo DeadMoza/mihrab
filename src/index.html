@@ -26,21 +26,7 @@
 
         <div class="planet"></div>
 
-        <select name="location" id="location">
-            <optgroup label="Libya"> 
-                <option value="tripoli">Tripoli</option>
-                <option value="misurata">Misurata</option>
-                <option value="benghazi">Benghazi</option>
-            </optgroup>
-            
-            <optgroup label="Turkiye">
-                <option value="istanbul">Istanbul</option>
-                <option value="ankara">Ankara</option>
-                <option value="eskişehir">Eskişehir</option>
-            </optgroup>
-           
-
-        </select>
+        <div class="location">Tripoli<span class="material-icons" style="cursor: default">room</span></div>
 
     </div>
 
@@ -58,28 +44,28 @@
 
             <div class="prayers">
 
-                <p id="fajr">Fajr 
-                    <span class="time"> 5:34 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                <p>Fajr 
+                    <span class="time"><span id="fajr"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p id="sunrise">Sunrise 
-                    <span class="time"> 7:25 AM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                <p>Sunrise 
+                    <span class="time"><span id="sunrise"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p id="dhuhr">Dhuhr 
-                    <span class="time"> 12:43 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                <p>Dhuhr 
+                    <span class="time"><span id="dhuhr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p id="asur">Asur 
-                    <span class="time"> 15:12 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span> 
+                <p>Asur 
+                    <span class="time"><span  id="asr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span> 
                 </p>
 
-                <p id="maghrib">Maghrib 
-                    <span class="time"> 18:06 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>
+                <p>Maghrib 
+                    <span class="time"><span id="maghrib"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p id="isha">Isha 
-                    <span class="time"> 19:02 PM <button class="material-icons" id="notification" onclick='toggleNotification(this)'>notifications_none</button></span>          
+                <p>Isha 
+                    <span class="time"><span id="isha"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>          
                 </p>
 
             </div>
@@ -110,6 +96,7 @@
 
     </div>
 
-    <script src="index.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
 </body>
 </html>
