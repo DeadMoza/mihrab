@@ -21,8 +21,8 @@
 
     <div class="header">
 
-        <p style="font-size: 40px; font-weight: bold; padding-top: 10px;">Asur</p>
-        <p>20 minutes until maghrib</p>
+        <p style="font-size: 40px; font-weight: bold; padding-top: 10px;">Dhuhr</p>
+        <p>47 minutes until asr</p>
 
         <div class="planet"></div>
 
@@ -36,9 +36,9 @@
 
             <div class="navigation">
 
-                <button class="back"></button>
-                <button class="current">Today | 21st November</button>
-                <button class="next"></button>
+                <button class="back" onclick="previousDate()"></button>
+                <button class="current" id="selectedDate"></button>
+                <button class="next" onclick="nextDate()"></button>
 
             </div>
 
@@ -56,7 +56,7 @@
                     <span class="time"><span id="dhuhr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p>Asur 
+                <p>Asr 
                     <span class="time"><span  id="asr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span> 
                 </p>
 
@@ -74,20 +74,25 @@
 
         <div class="misc">
 
-            <div class="quotes">
+            <fieldset class="quotes">
+                <legend style="padding: 5px;"><b>Citations</b></legend>
                 <div class="container">
                     <blockquote>
                         <p>
-                            <i>&ldquo;بتمشتيب مشبيتشم بيمتشيمسب تشم مشسيتبمشتي بمشيسبتمش بشتمبي مشيتب&rdquo; </i>
+                            <i>&ldquo;
+                                
+للهم بك أمسينا وبك أصبحنا، وبك نحياوبك نموت، وإليك المصير
+                                <!-- اللهمَّ  أنتَ  خلَقتَ  نفسي,  وأنتَ  توفَّاها,  لك  مماتها  ومحياها ,  إن  أحييتها  فاحفظها,  وإن  أمَتّها  فاغفر  لها,  اللهمَّ  إني  أسألك  العافية -->
+                                &rdquo; </i>
                         </p>
                     </blockquote>
                     <blockquote>
                         <p>
-                            <i>&ldquo;English translation of whatever is up there&rdquo; </i>
+                            <i>&ldquo;Oh Allah, we live in the evening with you, and with you we become in the morning, and by you we live and by you we die, and to you is the final destination&rdquo;</i>
                         </p>
                     </blockquote>
                 </div>
-            </div>
+            </fieldset>
   
   
         </div>

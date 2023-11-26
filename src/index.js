@@ -425,40 +425,80 @@ var DMath = {
 	}
 }
 
-
-
-
-
-
-
-let prayTimes = new PrayTimes();
-prayTimes.setMethod("Karachi");
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 let date = new Date();
-const coordinates = [32.8, 13.2];
+const currentDay = date.getDate();
 
-const time = prayTimes.getTimes(date, coordinates);
+const selectedDate = document.getElementById("selectedDate");
+selectedDate.innerHTML = `Today | ${date.getDate()} ${months[date.getMonth()]}`;
+
+let finalDate = date;
+const finalCoordinates = [32.8, 13.2];
+
+const prayTimes = new PrayTimes();
+prayTimes.setMethod("Karachi");
+const time = prayTimes.getTimes(finalDate, finalCoordinates);
 
 
 
 
 const fajr = document.getElementById('fajr');
-fajr.innerText = time.fajr;
+fajr.innerText = time.fajr + " AM";
 
 const sunrise = document.getElementById('sunrise');
-sunrise.innerText = time.sunrise;
+sunrise.innerText = time.sunrise + " AM";
 
 const dhuhr = document.getElementById('dhuhr');
-dhuhr.innerText = time.dhuhr;
+dhuhr.innerText = time.dhuhr + " PM";
 
 const asr = document.getElementById('asr');
-asr.innerText = time.asr;
+asr.innerText = time.asr + " PM";
 
 const maghrib = document.getElementById('maghrib');
-maghrib.innerText = time.maghrib;
+maghrib.innerText = time.maghrib + " PM";
 
 const isha = document.getElementById("isha");
-isha.innerText = time.isha;
+isha.innerText = time.isha + " PM";
+
+
+
+function previousDate() {
+	date.setDate(date.getDate() - 1);
+	const newTimes = prayTimes.getTimes(finalDate, finalCoordinates);
+	fajr.innerText = newTimes.fajr + " AM";
+	sunrise.innerText = newTimes.sunrise + " AM";
+	dhuhr.innerText = newTimes.dhuhr + " PM";
+	asr.innerText = newTimes.asr + " PM";
+	maghrib.innerText = newTimes.maghrib + " PM";
+	isha.innerText = newTimes.isha + " PM";
+
+	if(date.getDate() === currentDay) {
+		selectedDate.innerHTML = `Today | ${date.getDate()} ${months[date.getMonth()]}`;
+	} else {
+	
+	selectedDate.innerHTML = `${weekDay[date.getDay()]} | ${date.getDate()} ${months[date.getMonth()]}`;
+	}
+}
+
+function nextDate() {
+	date.setDate(date.getDate() + 1);
+	const newTimes = prayTimes.getTimes(finalDate, finalCoordinates);
+	fajr.innerText = newTimes.fajr + " AM";
+	sunrise.innerText = newTimes.sunrise + " AM";
+	dhuhr.innerText = newTimes.dhuhr + " PM";
+	asr.innerText = newTimes.asr + " PM";
+	maghrib.innerText = newTimes.maghrib + " PM";
+	isha.innerText = newTimes.isha + " PM";
+
+	if(date.getDate() === currentDay) {
+		selectedDate.innerHTML = `Today | ${date.getDate()} ${months[date.getMonth()]}`;
+	} else {
+	
+	selectedDate.innerHTML = `${weekDay[date.getDay()]} | ${date.getDate()} ${months[date.getMonth()]}`;
+	}
+}
 
 
 
