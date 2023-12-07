@@ -17,16 +17,46 @@
 
 </head>
 
-<body>
+<body id="body">
 
-    <div class="header">
+    <div id="header">
 
-        <p style="font-size: 40px; font-weight: bold; padding-top: 10px;">Dhuhr</p>
-        <p>47 minutes until asr</p>
+        <p id="activePrayer" style="font-size: 2.4rem; font-weight: bold"></p>
+        <p id="remaining"></p>
 
-        <div class="planet"></div>
+        <div id="planet"></div>
 
-        <div class="location">Tripoli<span class="material-icons" style="cursor: default">room</span></div>
+        <dialog closed id="locationDialog"> 
+        
+            <h2>Libya</h2>
+            <button  id="Tripoli" onclick="locationSelect(this.id)">Tripoli</button>
+            <button  id="Misurata" onclick="locationSelect(this.id)">Misurata</button>
+            <button  id="Benghazi" onclick="locationSelect(this.id)">Benghazi</button>
+
+            <h2>Türkiye</h2>
+            <button  id="Istanbul" onclick="locationSelect(this.id)">Istanbul</button>
+            <button  id="Ankara" onclick="locationSelect(this.id)">Ankara</button>
+            <button  id="Eskişehir" onclick="locationSelect(this.id)">Eskişehir</button>
+
+            <h2>Custom Location</h2>
+            
+            <input type="text" name="latitude" placeholder="Latitude">
+            <input type="text" name="longitude" placeholder="Longitude">
+
+            <br>
+            <br>
+
+            <button onclick="closeLocationDialog()">Cancel</button> 
+            <button onclick="confirmLocation()">Confirm</button>
+        
+        
+        </dialog>
+
+            <div class="location" id="location">
+                <button id="locationButton" onclick="openLocationDialog()">Tripoli</button>
+                <span class="material-icons" style="cursor: default">room</span>
+    
+            </div>
 
     </div>
 
@@ -80,9 +110,8 @@
                     <blockquote>
                         <p>
                             <i>&ldquo;
-                                
-للهم بك أمسينا وبك أصبحنا، وبك نحياوبك نموت، وإليك المصير
-                                <!-- اللهمَّ  أنتَ  خلَقتَ  نفسي,  وأنتَ  توفَّاها,  لك  مماتها  ومحياها ,  إن  أحييتها  فاحفظها,  وإن  أمَتّها  فاغفر  لها,  اللهمَّ  إني  أسألك  العافية -->
+                            
+                                اللهمَّ  أنتَ  خلَقتَ  نفسي,  وأنتَ  توفَّاها,  لك  مماتها  ومحياها ,  إن  أحييتها  فاحفظها,  وإن  أمَتّها  فاغفر  لها,  اللهمَّ  إني  أسألك  العافية
                                 &rdquo; </i>
                         </p>
                     </blockquote>
