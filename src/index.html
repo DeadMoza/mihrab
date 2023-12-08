@@ -67,34 +67,34 @@
             <div class="navigation">
 
                 <button class="back" onclick="previousDate()"></button>
-                <button class="current" id="selectedDate"></button>
+                <div class="current" id="selectedDate"></div>
                 <button class="next" onclick="nextDate()"></button>
 
             </div>
 
             <div class="prayers">
 
-                <p>Fajr 
+                <p id="activeFajr">Fajr 
                     <span class="time"><span id="fajr"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p>Sunrise 
+                <p id="activeSunrise">Sunrise 
                     <span class="time"><span id="sunrise"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p>Dhuhr 
+                <p id="activeDhuhr">Dhuhr 
                     <span class="time"><span id="dhuhr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p>Asr 
-                    <span class="time"><span  id="asr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span> 
+                <p id="activeAsr">Asr 
+                    <span class="time"><span id="asr"></span><button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span> 
                 </p>
 
-                <p>Maghrib 
+                <p id="activeMaghrib">Maghrib 
                     <span class="time"><span id="maghrib"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>
                 </p>
 
-                <p>Isha 
+                <p id="activeIsha">Isha 
                     <span class="time"><span id="isha"></span>  <button class="material-icons" onclick='toggleNotification(this)'>notifications_none</button></span>          
                 </p>
 
@@ -108,16 +108,17 @@
                 <legend style="padding: 5px;"><b>Citations</b></legend>
                 <div class="container">
                     <blockquote>
-                        <p>
-                            <i>&ldquo;
-                            
-                                اللهمَّ  أنتَ  خلَقتَ  نفسي,  وأنتَ  توفَّاها,  لك  مماتها  ومحياها ,  إن  أحييتها  فاحفظها,  وإن  أمَتّها  فاغفر  لها,  اللهمَّ  إني  أسألك  العافية
-                                &rdquo; </i>
+                        <p> &rdquo; 
+                            <i id="arabicCitation">
+                               
+                            </i>&ldquo; 
                         </p>
                     </blockquote>
                     <blockquote>
-                        <p>
-                            <i>&ldquo;Oh Allah, we live in the evening with you, and with you we become in the morning, and by you we live and by you we die, and to you is the final destination&rdquo;</i>
+                        <p>&ldquo;
+                            <i id="englishCitation">
+                                 
+                            </i>&rdquo;
                         </p>
                     </blockquote>
                 </div>

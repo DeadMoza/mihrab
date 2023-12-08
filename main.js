@@ -4,13 +4,20 @@ const createWindow = () => {
     const win = new BrowserWindow({
       width: 700,
       height: 600,
+      maximizable: false,
+      fullscreenable: false,
+      resizable: false,
+      useContentSize: true,
+      frame: false,
+      
+    
        webPreferences: {
         nodeIntegration: true
        }
     });
   
     win.loadFile('src/index.html');
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
   }
 
   try {

@@ -566,15 +566,11 @@ function timeDiff(currentTime, targetTime, nextPrayer) {
 
 	}
 	
-	
 
-	
-	
-	
-	
 	return output;
 
 }
+
 
 
 function updateUi() {
@@ -582,7 +578,7 @@ function updateUi() {
 	const remaining = document.getElementById("remaining");
 	const newDate = new Date();
 	let currentMinutes = newDate.getMinutes();
-	const currentHour = newDate.getHours();
+	let currentHour = newDate.getHours();
 	
 	if (currentHour == "0") {
 		currentHour = 24;
@@ -607,36 +603,55 @@ function updateUi() {
 		currentPrayer = "Fajr";
 		remainingTime = timeDiff(currentTime, currentSunrise, "Sunrise");
 
+		const fajr = document.getElementById("activeFajr");
+		fajr.style.border = "solid 4px #f1c40f";
+
 
 	} else if(currentTime >= currentSunrise && currentTime < currentDhuhr) {
 		currentPrayer = "Duha";
 		remainingTime = timeDiff(currentTime, currentDhuhr, "Dhuhr");
+
+		const sunrise = document.getElementById("activeSunrise");
+		sunrise.style.border = "solid 4px #f1c40f";
 		
 
 	} else if(currentTime >= currentDhuhr && currentTime < currentAsr) {
 		currentPrayer = "Dhuhr";
 		remainingTime = timeDiff(currentTime, currentAsr, "Asr");
 
-		
+		const dhuhr = document.getElementById("activeDhuhr");
+		dhuhr.style.border = "solid 4px #f1c40f";
+
 
 	} else if(currentTime >= currentAsr && currentTime < currentMaghrib) {
 		currentPrayer = "Asr";
 		remainingTime = timeDiff(currentTime, currentMaghrib, "Maghrib");
-		
+
+		const asr = document.getElementById("activeAsr");
+		asr.style.border = "solid 4px #f1c40f";
 		
 
 	} else if(currentTime >= currentMaghrib && currentTime < currentIsha) {
 		currentPrayer = "Maghrib";
 		remainingTime = timeDiff(currentTime, currentIsha, "Isha");
+
+		const maghrib = document.getElementById("activeMaghrib");
+		maghrib.style.border = "solid 4px #f1c40f";
 		
 
 	} else {
 		currentPrayer = "Isha";
-		
-		
-		
-	}
+		const fajrHours = (24 - Math.floor(currentTime)) + (Math.floor(currentFajr)) + Math.floor(currentTime);
+		const fajrMinutes = Math.round((currentFajr % 1) * 100);
 
+		const fajrTime = fajrHours + "." + fajrMinutes;
+		remainingTime = timeDiff(currentTime, fajrTime, "Fajr");
+
+		const isha = document.getElementById("activeIsha");
+		isha.style.border = "solid 4px #f1c40f";
+
+	}
+	
 	activePrayer.innerText = currentPrayer;
 	remaining.innerText = remainingTime;
 
@@ -746,7 +761,13 @@ function confirmLocation() {
 	
 }
 
+function generateCitaion() {
+	const arabicCitation = document.getElementById('arabicCitation');
+	const englishCitation = document.getElementById('englishCitation');
 
+	arabicCitation.innerText = "Wandie";
+	englishCitation.innerText = "Eandie";
+}
 
 function toggleNotification(bell) {
     if(bell.innerText === 'notifications') {
@@ -755,3 +776,5 @@ function toggleNotification(bell) {
         bell.innerText = 'notifications';
     }
 }
+
+generateCitaion();

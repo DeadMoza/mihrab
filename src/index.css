@@ -6,7 +6,16 @@
 body {
     font-family: "Cabin", sans-serif;
     margin: 0;
+    -webkit-app-region: drag;
 
+}
+
+button {
+    -webkit-app-region: no-drag;
+}
+
+input {
+    -webkit-app-region: no-drag;
 }
 
 .bodyDayTimeMode {
@@ -193,7 +202,9 @@ body {
 
 .current {
     border: solid 2px;
-    border-radius: 5px;
+    border-radius: 3px;
+    padding: 5px;
+
 }
 
 .next {
@@ -206,9 +217,8 @@ body {
 
 
 .prayers p {
-    border: solid 2px;
+    border: solid 2px #f1c40f;
     border-radius: 5px;
-    border-color: #f1c40f;
     display: flex;
     padding: 5px;
     justify-content: space-between;
@@ -234,7 +244,7 @@ body {
 .quotes {
     text-align: center;
     width: 320px;
-    height: 317px;
+    height: 322px;
     border: solid 2px;
     border-color: #f1c40f;
     border-radius: 5px; 
