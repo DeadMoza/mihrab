@@ -6,12 +6,12 @@ Cross platform islamic Prayer reminder application, made with electron.
 
 Sunrise --> Maghrib           |  Maghrib --> Sunrise
 :-------------------------:|:-------------------------:
-![Day time image preview](themes/daytimePreview.png)  |  ![Night time image preview](themes/nighttimePreview.png)
+![Day time image preview](themes/previews/mihrabDayPreview.png)  |  ![Night time image preview](themes/previews/mihrabNightPreview.png)
 
-- Accurate prayer times for any day of the year based on the user's location.
-- basic OS notifications with system sound settings.
-- Randomally generated citations that change every 4 hours.
-- Select which prayer you'd like to recieve notifications for.
-- Prayer times are calculated using the **University of Islamic Sciences, Karachi** calculation method.
+- Accurate prayer times for any day based on the user's location.
+- basic operating system notifications with default sound settings.
+- Randomally generated citations that change every 30 minutes.
+- Receive notifications for select prayers.
+- Prayer times are calculated using the **University of Islamic Sciences** calculation method.
 
 Will soon be available on the microsoft store/etc.

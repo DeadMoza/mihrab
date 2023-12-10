@@ -450,14 +450,34 @@ const locations = {
 	"Eskişehir": [39.7, 30.5]
 };
 
-let finalCoordinates = locations["Tripoli"];
+let finalCoordinates;
+
+const locationPreview = document.getElementById('locationButton');
+const existingLocation = localStorage.getItem('location');
+const locationData = existingLocation || "Tripoli";
+
+try {
+
+	const existingCoordinates = JSON.parse(existingLocation);
+	finalCoordinates = [existingCoordinates[0], existingCoordinates[1]];
+
+	locationPreview.innerText = "Custom";
+	
+} catch(e) {
+	
+	locationPreview.innerText = locationData;
+	finalCoordinates = locations[locationData];
+	
+	
+	
+}
 
 
 
 
 const prayTimes = new PrayTimes();
 prayTimes.setMethod("Karachi");
-const time = prayTimes.getTimes(finalDate, finalCoordinates);
+let time = prayTimes.getTimes(finalDate, finalCoordinates);
 
 
 function openLocationDialog() {
@@ -713,8 +733,7 @@ function updateUi() {
 	}
 }
 
-setInterval(updateUi, 60000);
-updateUi();
+
 
 
 
@@ -751,6 +770,8 @@ function confirmLocation() {
 		buttons.forEach(location => {
 			if(location.style.backgroundColor != "white") {
 				finalLocation = location.id;
+
+				localStorage.setItem('location', finalLocation);
 			}
 		})
 	
@@ -759,6 +780,8 @@ function confirmLocation() {
 		
 		finalCoordinates = [latitude, longitude];
 		finalLocation = "Custom";
+
+		localStorage.setItem('location', JSON.stringify(finalCoordinates));
 
 	}
 	
@@ -835,6 +858,11 @@ function toggleNotification(bell) {
     }
 }
 
-
+setInterval(updateUi, 60000);
 setInterval(generateCitation, 1800000);
+
+updateUi();
 generateCitation();
+
+
+
