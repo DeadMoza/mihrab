@@ -20,8 +20,8 @@ input {
 
 .bodyDayTimeMode {
      
-     background: rgb(255,255,255);
-     background: linear-gradient(0deg, rgba(255,255,255,1) 50%, rgba(209,230,255,1) 100%);
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 35%, rgba(187,218,255,1) 100%); 
 
 }
 

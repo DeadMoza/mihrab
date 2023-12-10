@@ -25,14 +25,14 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="0.50646226"
-     inkscape:cx="1299.2084"
-     inkscape:cy="459.06678"
+     inkscape:cx="1296.2466"
+     inkscape:cy="427.47509"
      inkscape:window-width="1920"
      inkscape:window-height="991"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g266">
+     inkscape:current-layer="g237">
     <inkscape:grid
        type="xygrid"
        id="grid9"
@@ -46,87 +46,47 @@
      transform="matrix(0.69878345,0,0,0.68106182,3.8143832,105.89528)"
      style="stroke-width:1.44956">
     <g
-       id="g266"
-       transform="matrix(0.80500201,0,0,0.82745137,-7.0492149,20.767619)"
-       style="opacity:0.85;stroke-width:1.77609"
+       id="g539"
+       transform="matrix(0.79598006,0,0,0.77083718,50.687919,6.4398189)"
+       style="opacity:0.75;stroke-width:1.85056"
        inkscape:label="g266">
-      <g
-         id="g961"
-         transform="matrix(1.0167664,0,0,0.91540159,877.77167,16.565727)"
-         style="opacity:0.75;stroke-width:1.84098"
-         inkscape:label="g266">
-        <g
-           id="g1885"
-           transform="matrix(0.86057134,0,0,0.91034728,-861.73405,-41.738712)"
-           style="opacity:0.75;stroke-width:2.07996"
-           inkscape:label="g266">
-          <rect
-             style="fill:#803300;fill-opacity:0.995169;stroke-width:0.550319"
-             id="rect1881"
-             width="14.627611"
-             height="42.838005"
-             x="98.269958"
-             y="142.91342" />
-          <g
-             id="g979"
-             transform="matrix(1.2366494,0,0,1.1716199,49.127029,32.424952)"
-             style="opacity:0.75;stroke-width:1.72797"
-             inkscape:label="g266">
-            <rect
-               style="fill:#803300;fill-opacity:0.995169;stroke-width:0.45719"
-               id="rect975"
-               width="14.627611"
-               height="42.838005"
-               x="130.11113"
-               y="95.079491" />
-            <path
-               id="path977"
-               style="fill:#008000;fill-opacity:0.995169;stroke-width:0.45719"
-               inkscape:transform-center-x="-0.029968289"
-               inkscape:transform-center-y="-7.523104"
-               d="m 141.51459,8.4624794 -12.78681,22.8130776 -13.27413,22.532992 6.00997,-0.07648 -10.97297,18.361153 7.64036,-0.0956 -12.08092,20.992001 35.55339,-0.463021 35.55493,0.318843 -12.16049,-20.94084 7.71994,0.06666 -11.04791,-18.319812 6.0849,0.05323 -13.36301,-22.480281 z"
-               transform="translate(-4.1793076,22.986247)" />
-          </g>
-          <path
-             id="path1883"
-             style="fill:#008000;fill-opacity:0.995169;stroke-width:0.550319"
-             inkscape:transform-center-x="-0.029968289"
-             inkscape:transform-center-y="-7.523104"
-             d="m 106.55549,75.945408 -12.786812,22.813077 -13.27413,22.532995 6.00997,-0.0765 -10.97297,18.36115 7.64036,-0.0956 -12.08092,20.992 35.553392,-0.46302 35.55493,0.31884 -12.16049,-20.94084 7.71994,0.0667 -11.04791,-18.31981 6.0849,0.0532 -13.36301,-22.48028 z" />
-        </g>
-        <rect
-           style="fill:#803300;fill-opacity:0.995169;stroke-width:0.487092"
-           id="rect957"
-           width="14.627611"
-           height="42.838005"
-           x="130.11113"
-           y="95.079491" />
-        <path
-           id="path959"
-           style="fill:#008000;fill-opacity:0.995169;stroke-width:0.487092"
-           inkscape:transform-center-x="-0.029968289"
-           inkscape:transform-center-y="-7.523104"
-           d="m 141.51459,8.4624794 -12.78681,22.8130776 -13.27413,22.532992 6.00997,-0.07648 -10.97297,18.361153 7.64036,-0.0956 -12.08092,20.992001 35.55339,-0.463021 35.55493,0.318843 -12.16049,-20.94084 7.71994,0.06666 -11.04791,-18.319812 6.0849,0.05323 -13.36301,-22.480281 z"
-           transform="translate(-4.1793076,22.986247)" />
-      </g>
       <rect
-         style="fill:#803300;fill-opacity:0.995169;stroke-width:0.469923"
-         id="rect262"
+         style="fill:#803300;fill-opacity:0.995169;stroke-width:0.489626"
+         id="rect535"
          width="14.627611"
          height="42.838005"
          x="130.11113"
          y="95.079491" />
       <path
-         id="path264"
-         style="fill:#008000;fill-opacity:0.995169;stroke-width:0.469923"
+         id="path537"
+         style="fill:#008000;fill-opacity:0.995169;stroke-width:0.489626"
          inkscape:transform-center-x="-0.029968289"
          inkscape:transform-center-y="-7.523104"
          d="m 141.51459,8.4624794 -12.78681,22.8130776 -13.27413,22.532992 6.00997,-0.07648 -10.97297,18.361153 7.64036,-0.0956 -12.08092,20.992001 35.55339,-0.463021 35.55493,0.318843 -12.16049,-20.94084 7.71994,0.06666 -11.04791,-18.319812 6.0849,0.05323 -13.36301,-22.480281 z"
          transform="translate(-4.1793076,22.986247)" />
     </g>
     <g
+       id="g266"
+       transform="matrix(0.80500201,0,0,0.82745137,31.826298,21.534678)"
+       style="opacity:0.85;stroke-width:1.77609"
+       inkscape:label="g266">
+      <rect
+         style="fill:#803300;fill-opacity:0.995169;stroke-width:0.469923"
+         id="rect262"
+         width="14.627611"
+         height="42.838005"
+         x="82.747391"
+         y="81.174278" />
+      <path
+         id="path264"
+         style="fill:#008000;fill-opacity:0.995169;stroke-width:0.469923"
+         inkscape:transform-center-x="-0.029968289"
+         inkscape:transform-center-y="-7.523104"
+         d="m 89.042841,10.1274 -12.78681,22.813078 -13.27413,22.532992 6.00997,-0.07648 -10.97297,18.361153 7.64036,-0.0956 -12.08092,20.992001 35.55339,-0.463021 35.554929,0.318843 -12.16049,-20.94084 7.71994,0.06666 -11.04791,-18.319812 6.0849,0.05323 -13.36301,-22.480281 z" />
+    </g>
+    <g
        id="g1879"
-       transform="matrix(1.0062525,0,0,0.96535994,-8.86061,4.1576239)"
+       transform="matrix(1.0062525,0,0,0.96535994,-8.8606061,-4.280027)"
        style="opacity:1;stroke-width:1.47075"
        inkscape:label="g266">
       <rect

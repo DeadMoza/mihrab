@@ -604,6 +604,8 @@ function updateUi() {
 		remainingTime = timeDiff(currentTime, currentSunrise, "Sunrise");
 
 		const fajr = document.getElementById("activeFajr");
+		const isha = document.getElementById("activeIsha");
+		isha.style.border = "solid 2px #f1c40f";
 		fajr.style.border = "solid 4px #f1c40f";
 
 
@@ -612,6 +614,8 @@ function updateUi() {
 		remainingTime = timeDiff(currentTime, currentDhuhr, "Dhuhr");
 
 		const sunrise = document.getElementById("activeSunrise");
+		const fajr = document.getElementById("activeFajr");
+		fajr.style.border = "solid 2px #f1c40f";
 		sunrise.style.border = "solid 4px #f1c40f";
 		
 
@@ -620,6 +624,8 @@ function updateUi() {
 		remainingTime = timeDiff(currentTime, currentAsr, "Asr");
 
 		const dhuhr = document.getElementById("activeDhuhr");
+		const sunrise  = document.getElementById("activeSunrise");
+		sunrise.style.border = "solid 2px #f1c40f";
 		dhuhr.style.border = "solid 4px #f1c40f";
 
 
@@ -628,6 +634,8 @@ function updateUi() {
 		remainingTime = timeDiff(currentTime, currentMaghrib, "Maghrib");
 
 		const asr = document.getElementById("activeAsr");
+		const dhuhr = document.getElementById("activeDhuhr");
+		dhuhr.style.border = "solid 2px #f1c40f";
 		asr.style.border = "solid 4px #f1c40f";
 		
 
@@ -636,18 +644,27 @@ function updateUi() {
 		remainingTime = timeDiff(currentTime, currentIsha, "Isha");
 
 		const maghrib = document.getElementById("activeMaghrib");
+		const asr = document.getElementById("activeAsr");
+		asr.style.border = "solid 2px #f1c40f";
 		maghrib.style.border = "solid 4px #f1c40f";
 		
 
 	} else {
 		currentPrayer = "Isha";
-		const fajrHours = (24 - Math.floor(currentTime)) + (Math.floor(currentFajr)) + Math.floor(currentTime);
-		const fajrMinutes = Math.round((currentFajr % 1) * 100);
+		if (currentTime >= currentFajr) {
+			const fajrHours = (24 - Math.floor(currentTime)) + (Math.floor(currentFajr)) + Math.floor(currentTime);
+			const fajrMinutes = Math.round((currentFajr % 1) * 100);
+	
+			const fajrTime = fajrHours + "." + fajrMinutes;
+			remainingTime = timeDiff(currentTime, fajrTime, "Fajr");
+		} else {
 
-		const fajrTime = fajrHours + "." + fajrMinutes;
-		remainingTime = timeDiff(currentTime, fajrTime, "Fajr");
+			remainingTime = timeDiff(currentTime, currentFajr, "Fajr");
+		}
 
 		const isha = document.getElementById("activeIsha");
+		const maghrib = document.getElementById("activeMaghrib");
+		maghrib.style.border = "solid 2px #f1c40f";
 		isha.style.border = "solid 4px #f1c40f";
 
 	}
@@ -761,20 +778,63 @@ function confirmLocation() {
 	
 }
 
-function generateCitaion() {
+function generateCitation() {
 	const arabicCitation = document.getElementById('arabicCitation');
 	const englishCitation = document.getElementById('englishCitation');
 
-	arabicCitation.innerText = "Wandie";
-	englishCitation.innerText = "Eandie";
+	let i = Math.floor(Math.random() * 10);
+
+	if(i % 2 !== 0) {
+		i++;
+	}
+
+	const citations = [
+"اللّهُـمَّ إِنِّـي أَسْأَلُـكَ عِلْمـاً نافِعـاً وَرِزْقـاً طَيِّـباً ، وَعَمَـلاً مُتَقَـبَّلاً",
+"Oh Allah, I ask you for useful knowledge, good provision, and acceptable deeds.",
+
+"اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ.",
+"Oh Allah, help me to mention you, thank you, and well worshipping you",
+
+
+"اللّهُـمَّ أَنْـتَ السَّلامُ ، وَمِـنْكَ السَّلام ، تَبارَكْتَ يا ذا الجَـلالِ وَالإِكْـرام .",
+" Oh Allah, you are peace, and from you is peace. Blessed are you, O possessor of majesty and honor.",
+
+"اللّهُـمَّ لا مانِعَ لِما أَعْطَـيْت، وَلا مُعْطِـيَ لِما مَنَـعْت، وَلا يَنْفَـعُ ذا الجَـدِّ مِنْـكَ الجَـد",
+"Oh Allah, there is no objection to what You have given, nor one who gives what You have withheld, and no one can benefit from your earnestness.",
+
+"لا حَـوْلَ وَلا قـوَّةَ إِلاّ بِاللهِ، لا إلهَ إلاّ اللّـه، وَلا نَعْـبُـدُ إِلاّ إيّـاه, لَهُ النِّعْـمَةُ وَلَهُ الفَضْل وَلَهُ الثَّـناءُ الحَـسَن، لا إلهَ إلاّ اللّهُ مخْلِصـينَ لَـهُ الدِّينَ وَلَوْ كَـرِهَ الكـافِرون.", 
+"There is no power nor strength except with Allah, there is no god but Allah, and we worship none but Him. To Him belongs the blessing, and to Him is the bounty, and to Him is the good praise. There is no god but Allah, sincere in religion to Him, even if The disbelievers rejected him.",
+
+"رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً",
+"I am satisfied with Allah as Lord, with Islam as religion, and with Muhammad, may God bless him and grant him peace, as Prophet.",
+
+"اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك",
+"Oh Allah, in the morning I bear witness to You, and I bear witness to the bearers of Your throne, and to Your angels, and to all of Your creation, that You are God. There is no god but You alone, with no partner. Yours, and that Muhammad is Your servant and Messenger",
+
+"بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم",
+"In the name of Allah, with whose name nothing can be harmed on earth or in heaven, and He is the All-Hearing, the All-Knowing.",
+
+"سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه",
+"Glory be to Allah, and praise be to Him according to the number of His creation, the satisfaction of Himself, the weight of His Throne, and the ink of His words.",
+
+"حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم",
+"Allah is sufficient for me, there is no god but Him, in Him I put my trust, and He is the Lord of the Great Throne."];
+
+	arabicCitation.innerText = citations[i];
+	englishCitation.innerText = citations[i + 1];
 }
 
 function toggleNotification(bell) {
     if(bell.innerText === 'notifications') {
         bell.innerText = 'notifications_none';
+		
     } else {
         bell.innerText = 'notifications';
+		new window.Notification("Notification enbaled for prayer");
+
     }
 }
 
-generateCitaion();
+
+setInterval(generateCitation, 1800000);
+generateCitation();
