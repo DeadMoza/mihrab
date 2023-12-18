@@ -420,7 +420,7 @@ let DMath = {
 	fixHour:  function(a) { return this.fix(a, 24 ); },
 
 	fix: function(a, b) { 
-		a = a- b* (Math.floor(a/ b));
+		a = a - b* (Math.floor(a/ b));
 		return (a < 0) ? a+ b : a;
 	}
 }
@@ -468,9 +468,18 @@ try {
 	locationPreview.innerText = locationData;
 	finalCoordinates = locations[locationData];
 	
-	
-	
 }
+
+
+
+const bells = document.querySelectorAll(".time > button");
+const existingNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+
+bells.forEach(bell => {
+	if (existingNotifications[bell.id]) bell.innerText = "notifications";
+});
+
+
 
 
 
@@ -596,6 +605,14 @@ function timeDiff(currentTime, targetTime, nextPrayer) {
 function updateUi() {
 	const activePrayer = document.getElementById("activePrayer");
 	const remaining = document.getElementById("remaining");
+
+	const fajrNotification = document.getElementById("fajrNotification");
+	const sunriseNotification = document.getElementById("sunriseNotification");
+	const dhuhrNotification = document.getElementById("dhuhrNotification");
+	const asrNotification = document.getElementById("asrNotification");
+	const maghribNotification = document.getElementById("maghribNotification");
+	const ishaNotification = document.getElementById("ishaNotification");
+
 	const newDate = new Date();
 	let currentMinutes = newDate.getMinutes();
 	let currentHour = newDate.getHours();
@@ -731,10 +748,28 @@ function updateUi() {
 		locationButton.style.color = "white";
 
 	}
+
+	if(fajrNotification.innerText === "notifications" && currentTime == currentFajr) {
+		new window.Notification("Good Morning", {body: "It is time to pray Fajr"});
+
+	} else if(sunriseNotification.innerText === "notifications" && currentTime == currentSunrise) {
+		new window.Notification("Good Morning", {body: "The sun has risen"});
+
+	} else if(dhuhrNotification.innerText === "notifications" && currentTime == currentDhuhr) {
+		new window.Notification("Good Evening", {body: "It is time to pray Dhuhr"});
+
+	} else if(asrNotification.innerText === "notifications" && currentTime == currentAsr) {
+		new window.Notification("Good Evening", {body: "It is time to pray Asr"});
+
+	} else if(maghribNotification.innerText === "notifications" && currentTime == currentMaghrib) {
+		new window.Notification("Good Afternoon", {body: "It is time to pray Maghrib"});
+
+	} else if(ishaNotification.innerText === "notifications" && currentTime == currentIsha) {
+		new window.Notification("Good Afternoon", {body: "It is time to pray Isha"});
+
+	}
+
 }
-
-
-
 
 
 
@@ -847,15 +882,38 @@ function generateCitation() {
 	englishCitation.innerText = citations[i + 1];
 }
 
-function toggleNotification(bell) {
-    if(bell.innerText === 'notifications') {
-        bell.innerText = 'notifications_none';
-		
-    } else {
-        bell.innerText = 'notifications';
-		new window.Notification("Notification enbaled for prayer");
+let notifications = {
+	"fajrNotification": false,
+	"sunriseNotification": false,
+	"dhuhrNotification": false,
+	"asrNotification": false,
+	"maghribNotification": false,
+	"ishaNotification": false,
+};
 
-    }
+function toggleNotification(bell) {
+
+	const activeNotifications = document.querySelectorAll(".time > button");
+
+    if(bell.innerText !== 'notifications') {
+		notifications[bell.id] = true;
+		bell.innerText = 'notifications';
+		
+
+    } else {
+
+		bell.innerText = 'notifications_none';
+		notifications[bell.id] = false;
+	}
+
+	activeNotifications.forEach(notif => {
+		if (notif.innerText === "notifications") {
+			notifications[notif.id] = true;
+		} else {
+			notifications[notif.id] = false;
+		}
+	});
+	localStorage.setItem("notifications", JSON.stringify(notifications));
 }
 
 setInterval(updateUi, 60000);
@@ -863,6 +921,3 @@ setInterval(generateCitation, 1800000);
 
 updateUi();
 generateCitation();
-
-
-

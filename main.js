@@ -9,7 +9,7 @@ const createWindow = () => {
       resizable: true,
       useContentSize: true,
       frame: false,
-      icon: 'themes/icons/mahrib@5x.png',
+      icon: 'themes/icons/mihrab@5x.png',
     
        webPreferences: {
         nodeIntegration: true
@@ -29,7 +29,7 @@ const createWindow = () => {
 
   app.whenReady().then(() => {
     createWindow();
-    const icon = nativeImage.createFromPath('themes/icons/mahrib.png');
+    const icon = nativeImage.createFromPath('themes/icons/mihrab.png');
     tray = new Tray(icon);
 
     const contextMenu = Menu.buildFromTemplate([
