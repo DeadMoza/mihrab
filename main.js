@@ -10,14 +10,24 @@ const createWindow = () => {
       useContentSize: true,
       frame: false,
       icon: 'themes/icons/mihrab@5x.png',
-    
-       webPreferences: {
-        nodeIntegration: true
-       }
+
+      webPreferences: {
+        nodeIntegration: false,
+        sandbox: true,
+        webSecurity: true,
+      }
     });
   
     win.loadFile('src/index.html');
     win.webContents.openDevTools();
+
+    win.on('close', () => {
+      win.close();
+    })
+  }
+
+  function quitApp() {
+    if(process.platform !== "darwin") app.quit();
   }
 
   try {
@@ -33,17 +43,22 @@ const createWindow = () => {
     tray = new Tray(icon);
 
     const contextMenu = Menu.buildFromTemplate([
-      {label: 'Exit', type: 'normal', click: () => app.quit()},
+      {label: 'Exit', type: 'normal', click: () => quitApp()},
+      
     ]);
 
     tray.setContextMenu(contextMenu);
     tray.setToolTip("Mihrab");
 
+    tray.addListener('click', () => createWindow());
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
       });
+
+
   });
 
   app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit();
+
   });

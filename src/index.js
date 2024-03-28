@@ -1,10 +1,6 @@
-function PrayTimes(method) {
-
-	let
+function PrayTimes() {
 	
-	// Time Names
-	timeNames = {
-		imsak    : 'Imsak',
+	const timeNames = {
 		fajr     : 'Fajr',
 		sunrise  : 'Sunrise',
 		dhuhr    : 'Dhuhr',
@@ -13,83 +9,45 @@ function PrayTimes(method) {
 		maghrib  : 'Maghrib',
 		isha     : 'Isha',
 		midnight : 'Midnight'
-	},
+	};
 
 
-	methods = {
-		MWL: {
-			name: 'Muslim World League',
-			params: { fajr: 18, isha: 17 } },
-		ISNA: {
-			name: 'Islamic Society of North America (ISNA)',
-			params: { fajr: 15, isha: 15 } },
-		Egypt: {
-			name: 'Egyptian General Authority of Survey',
-			params: { fajr: 19.5, isha: 17.5 } },
-		Makkah: {
-			name: 'Umm Al-Qura University, Makkah',
-			params: { fajr: 18.5, isha: '90 min' } },  // fajr was 19 degrees before 1430 hijri
+	const methods = {
 		Karachi: {
 			name: 'University of Islamic Sciences, Karachi',
 			params: { fajr: 18, isha: 18 } },
-		Tehran: {
-			name: 'Institute of Geophysics, University of Tehran',
-			params: { fajr: 17.7, isha: 14, maghrib: 4.5, midnight: 'Jafari' } },  // isha is not explicitly specified in this method
-		Jafari: {
-			name: 'Shia Ithna-Ashari, Leva Institute, Qum',
-			params: { fajr: 16, isha: 14, maghrib: 4, midnight: 'Jafari' } }
-	},
+	};
 
 
 	// Default Parameters in Calculation Methods
-	defaultParams = {
+	const defaultParams = {
 		maghrib: '0 min', midnight: 'Standard'
 
-	},
- 
- 
-	
-	calcMethod = 'MWL',
-
-	// do not change anything here; use adjust method instead
-	setting = {  
-		imsak    : '10 min',
-		dhuhr    : '0 min',  
-		asr      : 'Standard',
-		highLats : 'NightMiddle'
-	},
-
-	timeFormat = '24h',
-	timeSuffixes = ['am', 'pm'],
-	invalidTime =  '-----',
-
-	numIterations = 1,
-	offset = {},
-
-
-
-	lat, lng, elv,      
-	timeZone, jDate;     
-	
-
-	
-	
-	// set methods defaults
-	let defParams = defaultParams;
-	for (let i in methods) {
-		let params = methods[i].params;
-		for (let j in defParams)
-			if ((typeof(params[j]) == 'undefined'))
-				params[j] = defParams[j];
 	};
 
-	// initialize settings
-	calcMethod = methods[method] ? method : calcMethod;
-	let params = methods[calcMethod].params;
-	for (let id in params)
-		setting[id] = params[id];
+	const setting = {  
+		dhuhr    : '0 min',  
+		asr      : 'Standard',
+		highLats : 'NightMiddle',
+	};
 
-	// init time offsets
+	let timeFormat = '24h';
+	const timeSuffixes = ['am', 'pm'];
+	const invalidTime =  '-----';
+	const numIterations = 1;
+	let offset = {};
+
+	let lat, lng, elv, timeZone, jDate;     
+
+	
+	for (let i in methods) {
+		let params = methods[i].params;
+		for (let j in defaultParams)
+			if ((typeof(params[j]) == 'undefined'))
+				params[j] = defaultParams[j];
+	};
+
+	
 	for (let i in timeNames)
 		offset[i] = 0;
 
@@ -97,40 +55,19 @@ function PrayTimes(method) {
 
 	return {
 
-	
-	// set calculation method 
-	setMethod: function(method) {
+	setMethod(method) {
 		if (methods[method]) {
 			this.adjust(methods[method].params);
 			calcMethod = method;
 		}
 	},
 
-
-	// set calculating parameters
-	adjust: function(params) {
+	adjust(params) {
 		for (let id in params)
 			setting[id] = params[id];
 	},
 
-
-	// set time offsets
-	tune: function(timeOffsets) {
-		for (let i in timeOffsets)
-			offset[i] = timeOffsets[i];
-	},
-
-
-	getMethod: function() { return calcMethod; },
-
-	getSetting: function() { return setting; },
-
-	getOffsets: function() { return offset; },
-
-	getDefaults: function() { return methods; },
-
-
-	getTimes: function(date, coords, timezone, dst, format) {
+	getTimes(date, coords, timezone, dst, format) {
 		lat = 1* coords[0];
 		lng = 1* coords[1]; 
 		elv = coords[2] ? 1* coords[2] : 0;
@@ -148,7 +85,7 @@ function PrayTimes(method) {
 	},
 
 
-	getFormattedTime: function(time, format, suffixes) {
+	getFormattedTime(time, format, suffixes) {
 		if (isNaN(time))
 			return invalidTime;
 		if (format == 'Float') return time;
@@ -165,14 +102,14 @@ function PrayTimes(method) {
 
 
 
-	midDay: function(time) {
+	midDay(time) {
 		let eqt = this.sunPosition(jDate+ time).equation;
 		let noon = DMath.fixHour(12- eqt);
 		return noon;
 	},
 
 
-	sunAngleTime: function(angle, time, direction) {
+	sunAngleTime(angle, time, direction) {
 		let decl = this.sunPosition(jDate+ time).declination;
 		let noon = this.midDay(time);
 		let t = 1/15* DMath.arccos((-DMath.sin(angle)- DMath.sin(decl)* DMath.sin(lat))/ 
@@ -181,14 +118,14 @@ function PrayTimes(method) {
 	},
 
 
-	asrTime: function(factor, time) { 
+	asrTime(factor, time) { 
 		let decl = this.sunPosition(jDate+ time).declination;
 		let angle = -DMath.arccot(factor+ DMath.tan(Math.abs(lat- decl)));
 		return this.sunAngleTime(angle, time);
 	},
 
 
-	sunPosition: function(jd) {
+	sunPosition(jd) {
 		let D = jd - 2451545.0;
 		let g = DMath.fixAngle(357.529 + 0.98560028* D);
 		let q = DMath.fixAngle(280.459 + 0.98564736* D);
@@ -205,7 +142,7 @@ function PrayTimes(method) {
 	},
 
 
-	julian: function(year, month, day) {
+	julian(year, month, day) {
 		if (month <= 2) {
 			year -= 1;
 			month += 12;
@@ -220,29 +157,28 @@ function PrayTimes(method) {
 	
 
 
-	computePrayerTimes: function(times) {
+	computePrayerTimes(times) {
 		times = this.dayPortion(times);
 		let params  = setting;
 		
-		let imsak   = this.sunAngleTime(this.eval(params.imsak), times.imsak, 'ccw');
-		let fajr    = this.sunAngleTime(this.eval(params.fajr), times.fajr, 'ccw');
+		let fajr    = this.sunAngleTime(this.parseInt(params.fajr), times.fajr, 'ccw');
 		let sunrise = this.sunAngleTime(this.riseSetAngle(), times.sunrise, 'ccw');  
 		let dhuhr   = this.midDay(times.dhuhr);
 		let asr     = this.asrTime(this.asrFactor(params.asr), times.asr);
 		let sunset  = this.sunAngleTime(this.riseSetAngle(), times.sunset);;
-		let maghrib = this.sunAngleTime(this.eval(params.maghrib), times.maghrib);
-		let isha    = this.sunAngleTime(this.eval(params.isha), times.isha);
+		let maghrib = this.sunAngleTime(this.parseInt(params.maghrib), times.maghrib);
+		let isha    = this.sunAngleTime(this.parseInt(params.isha), times.isha);
 
 		return {
-			imsak: imsak, fajr: fajr, sunrise: sunrise, dhuhr: dhuhr, 
+			fajr: fajr, sunrise: sunrise, dhuhr: dhuhr, 
 			asr: asr, sunset: sunset, maghrib: maghrib, isha: isha
 		};
 	},
 
 
-	computeTimes: function() {
+	computeTimes() {
 		let times = { 
-			imsak: 5, fajr: 5, sunrise: 6, dhuhr: 12, 
+			fajr: 5, sunrise: 6, dhuhr: 12, 
 			asr: 13, sunset: 18, maghrib: 18, isha: 18
 		};
 
@@ -260,67 +196,63 @@ function PrayTimes(method) {
 	},
 
 
-	adjustTimes: function(times) {
+	adjustTimes(times) {
 		let params = setting;
 		for (let i in times)
 			times[i] += timeZone- lng/ 15;
 			
 		if (params.highLats != 'None')
 			times = this.adjustHighLats(times);
-			
-		if (this.isMin(params.imsak))
-			times.imsak = times.fajr- this.eval(params.imsak)/ 60;
+	
 		if (this.isMin(params.maghrib))
-			times.maghrib = times.sunset+ this.eval(params.maghrib)/ 60;
+			times.maghrib = times.sunset+ parseFloat(params.maghrib)/ 60;
 		if (this.isMin(params.isha))
-			times.isha = times.maghrib+ this.eval(params.isha)/ 60;
-		times.dhuhr += this.eval(params.dhuhr)/ 60; 
+			times.isha = times.maghrib+ this.parseInt(params.isha)/ 60;
+		times.dhuhr += this.parseInt(params.dhuhr)/ 60; 
 
 		return times;
 	},
 
 
-	asrFactor: function(asrParam) {
+	asrFactor(asrParam) {
 		let factor = {Standard: 1, Hanafi: 2}[asrParam];
-		return factor || this.eval(asrParam);
+		return factor || this.parseInt(asrParam);
 	},
 
 
-	riseSetAngle: function() {
+	riseSetAngle() {
 		let angle = 0.0347* Math.sqrt(elv); 
 		return 0.833+ angle;
 	},
 
-
-	// apply offsets to the times
-	tuneTimes: function(times) {
+	tuneTimes(times) {
 		for (let i in times)
 			times[i] += offset[i]/ 60; 
 		return times;
 	},
 
 
-	modifyFormats: function(times) {
+	modifyFormats(times) {
 		for (let i in times)
 			times[i] = this.getFormattedTime(times[i], timeFormat); 
 		return times;
 	},
 
 
-	adjustHighLats: function(times) {
+	adjustHighLats(times) {
 		let params = setting;
 		let nightTime = this.timeDiff(times.sunset, times.sunrise); 
 
-		times.imsak = this.adjustHLTime(times.imsak, times.sunrise, this.eval(params.imsak), nightTime, 'ccw');
-		times.fajr  = this.adjustHLTime(times.fajr, times.sunrise, this.eval(params.fajr), nightTime, 'ccw');
-		times.isha  = this.adjustHLTime(times.isha, times.sunset, this.eval(params.isha), nightTime);
-		times.maghrib = this.adjustHLTime(times.maghrib, times.sunset, this.eval(params.maghrib), nightTime);
+		
+		times.fajr  = this.adjustHLTime(times.fajr, times.sunrise, parseFloat(params.fajr), nightTime, 'ccw');
+		times.isha  = this.adjustHLTime(times.isha, times.sunset, parseFloat(params.isha), nightTime);
+		times.maghrib = this.adjustHLTime(times.maghrib, times.sunset, parseFloat(params.maghrib), nightTime);
 		
 		return times;
 	},
 
 	
-	adjustHLTime: function(time, base, angle, night, direction) {
+	adjustHLTime(time, base, angle, night, direction) {
 		let portion = this.nightPortion(angle, night);
 		let timeDiff = (direction == 'ccw') ? 
 			this.timeDiff(time, base):
@@ -331,7 +263,7 @@ function PrayTimes(method) {
 	},
 
 	
-	nightPortion: function(angle, night) {
+	nightPortion(angle, night) {
 		let method = setting.highLats;
 		let portion = 1/2 // MidNight
 		if (method == 'AngleBased')
@@ -342,17 +274,13 @@ function PrayTimes(method) {
 	},
 
 
-	dayPortion: function(times) {
+	dayPortion(times) {
 		for (let i in times)
 			times[i] /= 24;
 		return times;
 	},
 
-
-
-
-	// get local time zone
-	getTimeZone: function(date) {
+	getTimeZone(date) {
 		let year = date[0];
 		let t1 = this.gmtOffset([year, 0, 1]);
 		let t2 = this.gmtOffset([year, 6, 1]);
@@ -360,12 +288,12 @@ function PrayTimes(method) {
 	},
 
 	
-	getDst: function(date) {
+	getDst(date) {
 		return 1* (this.gmtOffset(date) != this.getTimeZone(date));
 	},
 
 
-	gmtOffset: function(date) {
+	gmtOffset(date) {
 		let localDate = new Date(date[0], date[1]- 1, date[2], 12, 0, 0, 0);
 		let GMTString = localDate.toGMTString();
 		let GMTDate = new Date(GMTString.substring(0, GMTString.lastIndexOf(' ')- 1));
@@ -375,32 +303,29 @@ function PrayTimes(method) {
 
 	
 
-	eval: function(str) {
+	parseInt(str) {
 		return 1* (str+ '').split(/[^0-9.+-]/)[0];
 	},
 
 
-	isMin: function(arg) {
+	isMin(arg) {
 		return (arg+ '').indexOf('min') != -1;
 	},
 
 
-	timeDiff: function(time1, time2) {
+	timeDiff(time1, time2) {
 		return DMath.fixHour(time2- time1);
 	},
 
 
-	twoDigitsFormat: function(num) {
+	twoDigitsFormat(num) {
 		return (num <10) ? '0'+ num : num;
 	}
 	
 }}
 
 
-
-
-
-let DMath = {
+const DMath = {
 
 	dtr: function(d) { return (d * Math.PI) / 180.0; },
 	rtd: function(r) { return (r * 180.0) / Math.PI; },
@@ -424,9 +349,6 @@ let DMath = {
 		return (a < 0) ? a+ b : a;
 	}
 }
-
-
-
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const weekDay = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -807,10 +729,10 @@ function confirmLocation() {
 				finalLocation = location.id;
 
 				localStorage.setItem('location', finalLocation);
-			}
-		})
-	
-			finalCoordinates = locations[finalLocation];
+				finalCoordinates = locations[finalLocation];
+			} 
+	});
+			
 	} else {
 		
 		finalCoordinates = [latitude, longitude];
@@ -818,7 +740,7 @@ function confirmLocation() {
 
 		localStorage.setItem('location', JSON.stringify(finalCoordinates));
 
-	}
+	} 
 	
 		displayedLocation.innerHTML = finalLocation;
 
@@ -836,6 +758,38 @@ function confirmLocation() {
 	
 }
 
+const citations = [
+	"اللّهُـمَّ إِنِّـي أَسْأَلُـكَ عِلْمـاً نافِعـاً وَرِزْقـاً طَيِّـباً ، وَعَمَـلاً مُتَقَـبَّلاً",
+	"Oh Allah, I ask you for useful knowledge, good provision, and acceptable deeds.",
+	
+	"اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ.",
+	"Oh Allah, help me to mention you, thank you, and well worshipping you",
+	
+	
+	"اللّهُـمَّ أَنْـتَ السَّلامُ ، وَمِـنْكَ السَّلام ، تَبارَكْتَ يا ذا الجَـلالِ وَالإِكْـرام .",
+	" Oh Allah, you are peace, and from you is peace. Blessed are you, O possessor of majesty and honor.",
+	
+	"اللّهُـمَّ لا مانِعَ لِما أَعْطَـيْت، وَلا مُعْطِـيَ لِما مَنَـعْت، وَلا يَنْفَـعُ ذا الجَـدِّ مِنْـكَ الجَـد",
+	"Oh Allah, there is no objection to what You have given, nor one who gives what You have withheld, and no one can benefit from your earnestness.",
+	
+	"لا حَـوْلَ وَلا قـوَّةَ إِلاّ بِاللهِ، لا إلهَ إلاّ اللّـه، وَلا نَعْـبُـدُ إِلاّ إيّـاه, لَهُ النِّعْـمَةُ وَلَهُ الفَضْل وَلَهُ الثَّـناءُ الحَـسَن، لا إلهَ إلاّ اللّهُ مخْلِصـينَ لَـهُ الدِّينَ وَلَوْ كَـرِهَ الكـافِرون.", 
+	"There is no power nor strength except with Allah, there is no god but Allah, and we worship none but Him. To Him belongs the blessing, and to Him is the bounty, and to Him is the good praise. There is no god but Allah, sincere in religion to Him, even if The disbelievers rejected him.",
+	
+	"رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً",
+	"I am satisfied with Allah as Lord, with Islam as religion, and with Muhammad, may God bless him and grant him peace, as Prophet.",
+	
+	"اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك",
+	"Oh Allah, in the morning I bear witness to You, and I bear witness to the bearers of Your throne, and to Your angels, and to all of Your creation, that You are God. There is no god but You alone, with no partner. Yours, and that Muhammad is Your servant and Messenger",
+	
+	"بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم",
+	"In the name of Allah, with whose name nothing can be harmed on earth or in heaven, and He is the All-Hearing, the All-Knowing.",
+	
+	"سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه",
+	"Glory be to Allah, and praise be to Him according to the number of His creation, the satisfaction of Himself, the weight of His Throne, and the ink of His words.",
+	
+	"حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم",
+	"Allah is sufficient for me, there is no god but Him, in Him I put my trust, and He is the Lord of the Great Throne."];
+
 function generateCitation() {
 	const arabicCitation = document.getElementById('arabicCitation');
 	const englishCitation = document.getElementById('englishCitation');
@@ -845,38 +799,6 @@ function generateCitation() {
 	if(i % 2 !== 0) {
 		i++;
 	}
-
-	const citations = [
-"اللّهُـمَّ إِنِّـي أَسْأَلُـكَ عِلْمـاً نافِعـاً وَرِزْقـاً طَيِّـباً ، وَعَمَـلاً مُتَقَـبَّلاً",
-"Oh Allah, I ask you for useful knowledge, good provision, and acceptable deeds.",
-
-"اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ.",
-"Oh Allah, help me to mention you, thank you, and well worshipping you",
-
-
-"اللّهُـمَّ أَنْـتَ السَّلامُ ، وَمِـنْكَ السَّلام ، تَبارَكْتَ يا ذا الجَـلالِ وَالإِكْـرام .",
-" Oh Allah, you are peace, and from you is peace. Blessed are you, O possessor of majesty and honor.",
-
-"اللّهُـمَّ لا مانِعَ لِما أَعْطَـيْت، وَلا مُعْطِـيَ لِما مَنَـعْت، وَلا يَنْفَـعُ ذا الجَـدِّ مِنْـكَ الجَـد",
-"Oh Allah, there is no objection to what You have given, nor one who gives what You have withheld, and no one can benefit from your earnestness.",
-
-"لا حَـوْلَ وَلا قـوَّةَ إِلاّ بِاللهِ، لا إلهَ إلاّ اللّـه، وَلا نَعْـبُـدُ إِلاّ إيّـاه, لَهُ النِّعْـمَةُ وَلَهُ الفَضْل وَلَهُ الثَّـناءُ الحَـسَن، لا إلهَ إلاّ اللّهُ مخْلِصـينَ لَـهُ الدِّينَ وَلَوْ كَـرِهَ الكـافِرون.", 
-"There is no power nor strength except with Allah, there is no god but Allah, and we worship none but Him. To Him belongs the blessing, and to Him is the bounty, and to Him is the good praise. There is no god but Allah, sincere in religion to Him, even if The disbelievers rejected him.",
-
-"رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً",
-"I am satisfied with Allah as Lord, with Islam as religion, and with Muhammad, may God bless him and grant him peace, as Prophet.",
-
-"اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك",
-"Oh Allah, in the morning I bear witness to You, and I bear witness to the bearers of Your throne, and to Your angels, and to all of Your creation, that You are God. There is no god but You alone, with no partner. Yours, and that Muhammad is Your servant and Messenger",
-
-"بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم",
-"In the name of Allah, with whose name nothing can be harmed on earth or in heaven, and He is the All-Hearing, the All-Knowing.",
-
-"سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه",
-"Glory be to Allah, and praise be to Him according to the number of His creation, the satisfaction of Himself, the weight of His Throne, and the ink of His words.",
-
-"حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم",
-"Allah is sufficient for me, there is no god but Him, in Him I put my trust, and He is the Lord of the Great Throne."];
 
 	arabicCitation.innerText = citations[i];
 	englishCitation.innerText = citations[i + 1];
@@ -914,6 +836,10 @@ function toggleNotification(bell) {
 		}
 	});
 	localStorage.setItem("notifications", JSON.stringify(notifications));
+}
+
+function closeWindow() {
+	window.close();
 }
 
 setInterval(updateUi, 60000);

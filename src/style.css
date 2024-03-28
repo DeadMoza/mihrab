@@ -68,6 +68,20 @@ input {
     
 }
 
+#closeButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1rem;
+    border: solid 1px transparent;
+    border-bottom-left-radius: 10px;
+}
+
+#closeButton:hover {
+    background-color: red;
+    color: white;
+}
+
 #locationDialog {
     position: absolute;
     text-align: center;
@@ -253,5 +267,3 @@ input {
     align-items: center
 
 }
-
-

@@ -1,4 +1,4 @@
-# Pray Alert
+# Mihrab
 
 Cross platform islamic Prayer reminder application, made with electron.
 
