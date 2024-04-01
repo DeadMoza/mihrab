@@ -19,7 +19,6 @@ const createWindow = () => {
     });
   
     win.loadFile('src/index.html');
-    win.webContents.openDevTools();
 
     win.on('close', () => {
       win.close();

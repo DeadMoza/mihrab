@@ -27,24 +27,13 @@
         <div id="planet"></div>
 
         <dialog closed id="locationDialog"> 
-        
-            <h2>Libya</h2>
-            <button  id="Tripoli" onclick="locationSelect(this.id)">Tripoli</button>
-            <button  id="Misurata" onclick="locationSelect(this.id)">Misurata</button>
-            <button  id="Benghazi" onclick="locationSelect(this.id)">Benghazi</button>
 
-            <h2>Türkiye</h2>
-            <button  id="Istanbul" onclick="locationSelect(this.id)">Istanbul</button>
-            <button  id="Ankara" onclick="locationSelect(this.id)">Ankara</button>
-            <button  id="Eskişehir" onclick="locationSelect(this.id)">Eskişehir</button>
-
-            <h2>Custom Location</h2>
+            <h1>Enter Location</h1>
             
             <input type="text" name="latitude" placeholder="Latitude">
             <input type="text" name="longitude" placeholder="Longitude">
 
-            <br>
-            <br>
+            <h4 id="displayedCurrentCoordinates" style="font-style: italic;"></h4>
 
             <button onclick="closeLocationDialog()">Cancel</button> 
             <button id="confirmLocationButton" onclick="confirmLocation()">Confirm</button>

@@ -84,15 +84,15 @@ input {
 
 #locationDialog {
     position: absolute;
-    text-align: center;
     padding: 10px;
     z-index: 101;
     border: solid #ffcc00;
     border-radius: 5px;
+    text-align: center;
 }
 
-#locationDialog h2 {
-    font-size: 18px;
+#locationDialog h1 {
+    font-size: 20px;
 }
 
 #locationDialog button {

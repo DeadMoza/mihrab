@@ -362,37 +362,27 @@ selectedDate.innerHTML = `Today | ${date.getDate()} ${months[date.getMonth()]}`;
 
 let finalDate = date;
 
-const locations = {
-	"Tripoli": [32.8, 13.2],
-	"Misurata": [32.3, 15.1],
-	"Benghazi": [32.1, 20.0],
-
-	"Istanbul": [41.0, 29.0],
-	"Ankara": [40.0, 33.0],
-	"Eskişehir": [39.7, 30.5]
-};
-
 let finalCoordinates;
 
 const locationPreview = document.getElementById('locationButton');
+const displayedCurrentCoordinates = document.getElementById('displayedCurrentCoordinates');
 const existingLocation = localStorage.getItem('location');
-const locationData = existingLocation || "Tripoli";
+const existingCoordinates = JSON.parse(existingLocation);
+const locationData = existingLocation || "Mecca";
+
+displayedCurrentCoordinates.innerHTML = `Current Coordinates: ${existingCoordinates[0]}, ${existingCoordinates[1]}`
 
 try {
 
-	const existingCoordinates = JSON.parse(existingLocation);
 	finalCoordinates = [existingCoordinates[0], existingCoordinates[1]];
-
 	locationPreview.innerText = "Custom";
 	
 } catch(e) {
 	
 	locationPreview.innerText = locationData;
-	finalCoordinates = locations[locationData];
+	finalCoordinates = [21.42, 39.81];
 	
 }
-
-
 
 const bells = document.querySelectorAll(".time > button");
 const existingNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
@@ -400,10 +390,6 @@ const existingNotifications = JSON.parse(localStorage.getItem('notifications')) 
 bells.forEach(bell => {
 	if (existingNotifications[bell.id]) bell.innerText = "notifications";
 });
-
-
-
-
 
 
 const prayTimes = new PrayTimes();
@@ -659,7 +645,7 @@ function updateUi() {
 		header.className = "headerNightTime";
 		location.style.color = "white";
 
-		for(let i = 0; i < 7; i++) {
+		for(let i = 0; i < 8; i++) {
 			icons[i].style.color = "white";
 		
 		}
@@ -668,6 +654,7 @@ function updateUi() {
 		current.style.color = "white";
 		next.style.color = "white";
 		locationButton.style.color = "white";
+		
 
 	}
 
@@ -693,56 +680,39 @@ function updateUi() {
 
 }
 
-
-
-function locationSelect(location) {
-
-	const buttons = document.querySelectorAll("dialog > button");
-	const selectedLocation = document.getElementById(location);
-
-	if (selectedLocation.style.backgroundColor == "white") {
-
-		buttons.forEach(button => {
-			button.style.backgroundColor = "white";
-		});
-
-		selectedLocation.style.backgroundColor = "#ffe682";
-
-	} else selectedLocation.style.backgroundColor = "white";
-	
-}
-
 function confirmLocation() {
-	const buttons = document.querySelectorAll("dialog > button");
 	const displayedLocation = document.getElementById("locationButton");
 	const dialog = document.getElementById("locationDialog");
 	const latitude = document.querySelectorAll("dialog > input")[0].value;
 	const longitude = document.querySelectorAll("dialog >input")[1].value;
 
 
-	let finalLocation;
+	let finalDisplayedLocation;
 
 		
-	if(latitude.trim() == "" || longitude.trim() == "") {
-		buttons.forEach(location => {
-			if(location.style.backgroundColor != "white") {
-				finalLocation = location.id;
+	if(latitude.trim() == "" || longitude.trim() == "" || isNaN(latitude) || isNaN(longitude)) {
 
-				localStorage.setItem('location', finalLocation);
-				finalCoordinates = locations[finalLocation];
-			} 
-	});
+		finalCoordinates = [21.42, 39.81];
+		finalDisplayedLocation = "Mecca";
+		displayedCurrentCoordinates.innerHTML = 'Current Coordinates: 21.42, 39.81';
+		localStorage.setItem('location', JSON.stringify(finalCoordinates));
+
+		updateUi();
+
+		
 			
 	} else {
 		
 		finalCoordinates = [latitude, longitude];
-		finalLocation = "Custom";
+		finalDisplayedLocation = "Custom";
+		displayedCurrentCoordinates.innerHTML = 'Current Coordinates: ' + finalCoordinates[0] + ', ' + finalCoordinates[1];
 
 		localStorage.setItem('location', JSON.stringify(finalCoordinates));
+		dialog.open = false;
 
 	} 
 	
-		displayedLocation.innerHTML = finalLocation;
+		displayedLocation.innerHTML = finalDisplayedLocation;
 
 		const newLocation = prayTimes.getTimes(finalDate, finalCoordinates);
 		fajr.innerText = newLocation.fajr;
@@ -751,8 +721,6 @@ function confirmLocation() {
 		asr.innerText = newLocation.asr;
 		maghrib.innerText = newLocation.maghrib;
 		isha.innerText = newLocation.isha;
-
-		dialog.open = false;
 
 		updateUi();
 	
