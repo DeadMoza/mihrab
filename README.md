@@ -1,6 +1,6 @@
 # Mihrab
 
-Cross platform islamic Prayer reminder application, made with electron.
+islamic Prayer reminder application for desktop(windows/linux).
 
 ### Application theme automatically alternates between two themes based on system time settings.
 
@@ -14,4 +14,4 @@ Sunrise --> Maghrib           |  Maghrib --> Sunrise
 - Receive notifications for select prayers.
 - Prayer times are calculated using the **University of Islamic Sciences** calculation method.
 
-Will soon be available on the microsoft store/etc.
+no macOS version.

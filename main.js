@@ -9,7 +9,7 @@ const createWindow = () => {
       resizable: true,
       useContentSize: true,
       frame: false,
-      icon: 'themes/icons/mihrab@5x.png',
+      icon: 'themes/icons/mihrabIcon.png',
 
       webPreferences: {
         nodeIntegration: false,
@@ -38,7 +38,7 @@ const createWindow = () => {
 
   app.whenReady().then(() => {
     createWindow();
-    const icon = nativeImage.createFromPath('themes/icons/mihrab.png');
+    const icon = nativeImage.createFromPath('themes/icons/mihrabIcon.png');
     tray = new Tray(icon);
 
     const contextMenu = Menu.buildFromTemplate([
