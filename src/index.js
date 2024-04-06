@@ -473,9 +473,14 @@ function timeDiff(currentTime, targetTime, nextPrayer) {
 
 	const diff = tMinutes - cMinutes;
 
-	const hours = Math.floor(diff / 60);
+	let hours = Math.floor(diff / 60);
 	const minutes = diff % 60;
 	
+	if(hours >= 24) {
+		hours = hours - 24;
+		
+	}
+
 	let output;
 
 	if(hours > 1) {
@@ -497,6 +502,7 @@ function timeDiff(currentTime, targetTime, nextPrayer) {
 
 	} else if(hours == 0 && minutes == 1) {
 		output = `1 minute remaining until ${nextPrayer}`
+
 	} else {
 
 		output = `${minutes} mins until ${nextPrayer}`;
